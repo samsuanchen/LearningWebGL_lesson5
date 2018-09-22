@@ -283,7 +283,7 @@
     var zRot = 0;
 
     function animate(now) {
-        var timeNow = now;
+        var timeNow = now || 0;
         if (lastTime != 0) {
             var elapsed = timeNow - lastTime;
 
