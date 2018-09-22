@@ -278,6 +278,9 @@
 
 
     var lastTime = 0;
+    var xRot = 0;
+    var yRot = 0;
+    var zRot = 0;
 
     function animate(now) {
         var timeNow = now;
@@ -292,9 +295,6 @@
     }
 
 
-    var xRot = 0;
-    var yRot = 0;
-    var zRot = 0;
 
     function drawScene(now) {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
