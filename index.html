@@ -334,7 +334,6 @@
 
 
     function webGLStart() {
-        var canvas = document.getElementById("lesson05-canvas");
         initGL(canvas);
         initShaders();
         initBuffers();
@@ -345,11 +344,8 @@
 
         tick();
     }
-
-
 </script>
 </head>
 <body onload="webGLStart();">
-    <canvas id="lesson05-canvas" style="border: none;" width="500" height="500"></canvas>
-    <img src="nehe.gif" height="42" width="42">
+    <canvas id="canvas" style="border: none;" width="500" height="500"></canvas>
 </body></html>
