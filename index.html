@@ -276,17 +276,24 @@
         cubeVertexIndexBuffer.numItems = 36;
     }
 
+
     var lastTime = 0;
+
+    function animate(now) {
+        var timeNow = now;
+        if (lastTime != 0) {
+        var elapsed = now / 1000;
+
+        xRot = 90 * elapsed;
+        yRot = 90 * elapsed;
+        zRot = 90 * elapsed;
+        lastTime = timeNow;
+    }
+
+
     var xRot = 0;
     var yRot = 0;
     var zRot = 0;
-    
-    function animate(now) {
-        var elapsed = now / 1000;
-        var xRot = 90 * elapsed;
-        var yRot = 90 * elapsed;
-        var zRot = 90 * elapsed;
-    }
 
     function drawScene(now) {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
