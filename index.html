@@ -280,6 +280,7 @@
     }
 
     function drawScene(now) {
+    	now = now || 0;
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -289,7 +290,7 @@
 
         mat4.translate(mvMatrix, [0.0, 0.0, -5.0]);
         
-        var elapsed = (now || 0) / 1000;
+        var elapsed = now / 1000;
 
         mat4.rotate(mvMatrix, degToRad(xRot * elapsed), [1, 0, 0]);
         mat4.rotate(mvMatrix, degToRad(yRot * elapsed), [0, 1, 0]);
