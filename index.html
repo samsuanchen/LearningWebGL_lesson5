@@ -284,11 +284,11 @@
 
     function animate(now) {
         var timeNow = now || 0;
-        var elapsed = timeNow - lastTime;
+        var elapsed = timeNow / 1000;
 
-        xRot += (90 * elapsed) / 1000.0;
-        yRot += (90 * elapsed) / 1000.0;
-        zRot += (90 * elapsed) / 1000.0;
+        xRot += 90 * elapsed;
+        yRot += 90 * elapsed;
+        zRot += 90 * elapsed;
         lastTime = timeNow;
     }
 
