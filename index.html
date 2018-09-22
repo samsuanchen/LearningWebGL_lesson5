@@ -137,7 +137,8 @@
             handleLoadedTexture(neheTexture)
         }
 
-        neheTexture.image.src = "nehe.gif";
+        neheTexture.image.src = 'nehe.gif?' + new Date().getTime();
+		neheTexture.image.setAttribute('crossOrigin', '');
     }
 
 
@@ -356,7 +357,7 @@
     <a href="http://learningwebgl.com/blog/?p=507">&lt;&lt; Back to Lesson 5</a><br>
 
     <canvas id="lesson05-canvas" style="border: none;" width="500" height="500"></canvas>
-    <img src="nehe.gif" alt="Smiley face" height="42" width="42">
+    <img src="smiley.gif" alt="Smiley face" height="42" width="42">
     <br>
     <a href="http://learningwebgl.com/blog/?p=507">&lt;&lt; Back to Lesson 5</a><br>
 
