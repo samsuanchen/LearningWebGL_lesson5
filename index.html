@@ -276,12 +276,19 @@
         cubeVertexIndexBuffer.numItems = 36;
     }
 
-
+    var lastTime = 0;
     var xRot = 0;
     var yRot = 0;
     var zRot = 0;
+    
+    function animate(now) {
+        var elapsed = now / 1000;
+        var xRot = 90 * elapsed;
+        var yRot = 90 * elapsed;
+        var zRot = 90 * elapsed;
+    }
 
-    function drawScene() {
+    function drawScene(now) {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -308,28 +315,14 @@
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
         setMatrixUniforms();
         gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-    }
-
-
-    var lastTime = 0;
-
-    function animate() {
-        var timeNow = new Date().getTime();
-        if (lastTime != 0) {
-            var elapsed = timeNow - lastTime;
-
-            xRot += (90 * elapsed) / 1000.0;
-            yRot += (90 * elapsed) / 1000.0;
-            zRot += (90 * elapsed) / 1000.0;
-        }
-        lastTime = timeNow;
-    }
-
-
-    function tick() {
-        requestAnimFrame(tick);
-        drawScene();
+        
         animate();
+    }
+
+
+    function tick(now) {
+        drawScene(now);
+        requestAnimFrame(tick);
     }
 
 
@@ -338,10 +331,8 @@
         initShaders();
         initBuffers();
         initTexture();
-
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
         gl.enable(gl.DEPTH_TEST);
-
         tick();
     }
 </script>
