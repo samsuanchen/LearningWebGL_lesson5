@@ -38,6 +38,9 @@
 
 <script type="text/javascript">
 
+    var xRot = 90;
+    var yRot = 90;
+    var zRot = 90;
     var gl;
 
     function initGL(canvas) {
@@ -276,24 +279,6 @@
         cubeVertexIndexBuffer.numItems = 36;
     }
 
-
-    var lastTime = 0;
-    var xRot = 0;
-    var yRot = 0;
-    var zRot = 0;
-
-    function animate(now) {
-        var timeNow = now || 0;
-        var elapsed = timeNow / 1000;
-
-        xRot = 90 * elapsed;
-        yRot = 90 * elapsed;
-        zRot = 90 * elapsed;
-        lastTime = timeNow;
-    }
-
-
-
     function drawScene(now) {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -303,10 +288,12 @@
         mat4.identity(mvMatrix);
 
         mat4.translate(mvMatrix, [0.0, 0.0, -5.0]);
+        
+        var elapsed = (now || 0) / 1000;
 
-        mat4.rotate(mvMatrix, degToRad(xRot), [1, 0, 0]);
-        mat4.rotate(mvMatrix, degToRad(yRot), [0, 1, 0]);
-        mat4.rotate(mvMatrix, degToRad(zRot), [0, 0, 1]);
+        mat4.rotate(mvMatrix, degToRad(xRot * elapsed), [1, 0, 0]);
+        mat4.rotate(mvMatrix, degToRad(yRot * elapsed), [0, 1, 0]);
+        mat4.rotate(mvMatrix, degToRad(zRot * elapsed), [0, 0, 1]);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
         gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, cubeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
@@ -321,8 +308,6 @@
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
         setMatrixUniforms();
         gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-        
-        animate(now);
     }
 
 
