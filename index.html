@@ -282,11 +282,12 @@
     function animate(now) {
         var timeNow = now;
         if (lastTime != 0) {
-        var elapsed = now / 1000;
+            var elapsed = timeNow - lastTime;
 
-        xRot = 90 * elapsed;
-        yRot = 90 * elapsed;
-        zRot = 90 * elapsed;
+            xRot += (90 * elapsed) / 1000.0;
+            yRot += (90 * elapsed) / 1000.0;
+            zRot += (90 * elapsed) / 1000.0;
+        }
         lastTime = timeNow;
     }
 
