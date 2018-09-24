@@ -229,15 +229,15 @@ function drawBox(elapsed, x, y, z) {
 	setMatrixUniforms();
 	gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 }
-var x=-.01, y=-.01, z=-5;
+var x1=-.01, y1=-.01, z1=-15, x1=.01, y1=.01, z1=-25;
 function drawScene(now) {
 	now = now || 0;
 	var elapsed = now / 1000;
 	gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
-	drawBox(elapsed, x, y, z);
-	drawBox(elapsed, x*1.2, y*1.2, z*1.2);
+	drawBox(elapsed, x1, y1, z1);
+	drawBox(elapsed, x2, y2, z2);
 }
 ////////////////////////////////////////////////////////////////////
 function tick(now) {
