@@ -219,7 +219,7 @@ function drawScene(now) {
 	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
 	mat4.identity(mvMatrix);
 	for(var x=-1; x<2; x++) for(var y=-1; y<2; y++) {
-	mat4.translate(mvMatrix, [X, Y, -5.0]);
+	mat4.translate(mvMatrix, [x, y, -5.0]);
 		var elapsed = now / 1000;
 		mat4.rotate(mvMatrix, degToRad(xRot * elapsed), [1, 0, 0]);
 		mat4.rotate(mvMatrix, degToRad(yRot * elapsed), [0, 1, 0]);
