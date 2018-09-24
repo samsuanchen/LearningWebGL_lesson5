@@ -3,6 +3,10 @@
 <title>LearningWebGL_lesson5</title>
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
 <script type="text/javascript" src="webgl-utils.js"></script>
+</head>
+<body onload="webGLStart();">
+    <canvas id="canvas" style="border: none;" width="500" height="500"></canvas>
+</body>
 <script type="text/javascript">
 ////////////////////////////////////////////////////////////////////
 var vertices = [
@@ -247,8 +251,4 @@ var shader_vs = `
         tick();
     }
 ////////////////////////////////////////////////////////////////////
-</script>
-</head>
-<body onload="webGLStart();">
-    <canvas id="canvas" style="border: none;" width="500" height="500"></canvas>
-</body></html>
+</script></html>
