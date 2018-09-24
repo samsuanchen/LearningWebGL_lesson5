@@ -36,6 +36,7 @@ var vertices = [
             -1.0,  1.0,  1.0,
             -1.0,  1.0, -1.0,
 ];
+var xyzSize = 3;
 ////////////////////////////////////////////////////////////////////
 var textureCoords = [
     /*前*/0.0, 0.0,
@@ -63,15 +64,17 @@ var textureCoords = [
           1.0, 1.0,
           0.0, 1.0,
 ];
+var xySize = 2;
 ////////////////////////////////////////////////////////////////////
 var cubeVertexIndices = [
-	0, 1, 2,      0, 2, 3,    // 前
-	4, 5, 6,      4, 6, 7,    // 後
-	8, 9, 10,     8, 10, 11,  // 上
+	00, 01, 02,   00, 02, 03, // 前
+	04, 05, 06,   04, 06, 07, // 後
+	08, 09, 10,   08, 10, 11, // 上
 	12, 13, 14,   12, 14, 15, // 下
 	16, 17, 18,   16, 18, 19, // 右
-	20, 21, 22,   20, 22, 23  // 左
+	20, 21, 22,   20, 22, 23, // 左
 ];
+var indexSize = 1;
 ////////////////////////////////////////////////////////////////////
 var shader_fs = `
     precision mediump float;
@@ -185,13 +188,11 @@ function initBuffers() {
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 	cubeVertexPositionBuffer.itemSize = 3;
 	cubeVertexPositionBuffer.numItems = 24;
-
 	cubeVertexTextureCoordBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoords), gl.STATIC_DRAW);
 	cubeVertexTextureCoordBuffer.itemSize = 2;
 	cubeVertexTextureCoordBuffer.numItems = 24;
-
 	cubeVertexIndexBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
 	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), gl.STATIC_DRAW);
@@ -206,15 +207,15 @@ function drawBox(elapsed, x, y, z) {
 	mat4.rotate(mvMatrix, degToRad(yRot * elapsed), [0, 1, 0]);
 	mat4.rotate(mvMatrix, degToRad(zRot * elapsed), [0, 0, 1]);
 	gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
-	gl.vertexAttribPointer(shaderProgram.aVertexPosition, cubeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+	gl.vertexAttribPointer(shaderProgram.aVertexPosition, xyzSize, gl.FLOAT, false, 0, 0);
 	gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
-	gl.vertexAttribPointer(shaderProgram.aTextureCoord, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+	gl.vertexAttribPointer(shaderProgram.aTextureCoord, xySize, gl.FLOAT, false, 0, 0);
 	gl.activeTexture(gl.TEXTURE0);
 	gl.bindTexture(gl.TEXTURE_2D, neheTexture);
 	gl.uniform1i(shaderProgram.uSampler, 0);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
 	setMatrixUniforms();
-	gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+	gl.drawElements(gl.TRIANGLES, cubeVertexIndices.length, gl.UNSIGNED_SHORT, 0);
 }
 var x1=-4, y1=-4, z1=-15, x2=-1.2, y2=-1.2, z2=-12, x3=1.6, y3=1.6, z3=-9;
 function drawScene(now) {
