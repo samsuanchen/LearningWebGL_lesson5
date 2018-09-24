@@ -212,14 +212,14 @@ function initBuffers() {
 	cubeVertexIndexBuffer.numItems = 36;
 }
 ////////////////////////////////////////////////////////////////////
-var xmi=-.1, xma=.2, dx=.1, ymi=-.1, yma=.2, dy=.1, z=50;
+var xmi=-.1, xma=.2, dx=.1, ymi=-.1, yma=.2, dy=.1, z=5;
 function drawScene(now) {
 	now = now || 0;
 	gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+	mat4.identity(mvMatrix);
 	for(var x=xmi; x<xma; x+=dx) for(var y=ymi; y<yma; y+=dy) {
-		mat4.identity(mvMatrix);
 		mat4.translate(mvMatrix, [x, y, z]);
 		var elapsed = now / 1000;
 		mat4.rotate(mvMatrix, degToRad(xRot * elapsed), [1, 0, 0]);
