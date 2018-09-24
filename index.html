@@ -229,7 +229,7 @@ function drawBox(elapsed, x, y, z) {
 	setMatrixUniforms();
 	gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 }
-var x1=-1, y1=-1, z1=-15, x2=0, y2=0, z2=-12, x3=1, y3=1, z3=-9;
+var x1=-4, y1=-4, z1=-15, x2=-1.2, y2=-1.2, z2=-12, x3=1.6, y3=1.6, z3=-9;
 function drawScene(now) {
 	now = now || 0;
 	var elapsed = now / 1000;
