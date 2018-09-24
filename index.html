@@ -186,18 +186,12 @@ function initBuffers() {
 	cubeVertexPositionBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-	cubeVertexPositionBuffer.itemSize = 3;
-	cubeVertexPositionBuffer.numItems = 24;
 	cubeVertexTextureCoordBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoords), gl.STATIC_DRAW);
-	cubeVertexTextureCoordBuffer.itemSize = 2;
-	cubeVertexTextureCoordBuffer.numItems = 24;
 	cubeVertexIndexBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
 	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), gl.STATIC_DRAW);
-	cubeVertexIndexBuffer.itemSize = 1;
-	cubeVertexIndexBuffer.numItems = 36;
 }
 ////////////////////////////////////////////////////////////////////
 function drawBox(elapsed, x, y, z) {
