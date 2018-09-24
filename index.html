@@ -212,30 +212,31 @@ function initBuffers() {
 	cubeVertexIndexBuffer.numItems = 36;
 }
 ////////////////////////////////////////////////////////////////////
-var x=0, y=0, z=15;
+function drawBox(elapsed, x, y, z) {
+	mat4.identity(mvMatrix);
+	mat4.translate(mvMatrix, [x, y, z]);
+	mat4.rotate(mvMatrix, degToRad(xRot * elapsed), [1, 0, 0]);
+	mat4.rotate(mvMatrix, degToRad(yRot * elapsed), [0, 1, 0]);
+	mat4.rotate(mvMatrix, degToRad(zRot * elapsed), [0, 0, 1]);
+	gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
+	gl.vertexAttribPointer(shaderProgram.aVertexPosition, cubeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+	gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
+	gl.vertexAttribPointer(shaderProgram.aTextureCoord, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+	gl.activeTexture(gl.TEXTURE0);
+	gl.bindTexture(gl.TEXTURE_2D, neheTexture);
+	gl.uniform1i(shaderProgram.uSampler, 0);
+	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+	setMatrixUniforms();
+	gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+}
 function drawScene(now) {
 	now = now || 0;
+	var elapsed = now / 1000;
 	gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
-	mat4.identity(mvMatrix);
-//	for(var x=xmi; x<xma; x+=dx) for(var y=ymi; y<yma; y+=dy) {
-		mat4.translate(mvMatrix, [x, y, z]);
-		var elapsed = now / 1000;
-		mat4.rotate(mvMatrix, degToRad(xRot * elapsed), [1, 0, 0]);
-		mat4.rotate(mvMatrix, degToRad(yRot * elapsed), [0, 1, 0]);
-		mat4.rotate(mvMatrix, degToRad(zRot * elapsed), [0, 0, 1]);
-		gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
-		gl.vertexAttribPointer(shaderProgram.aVertexPosition, cubeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-		gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
-		gl.vertexAttribPointer(shaderProgram.aTextureCoord, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
-		gl.activeTexture(gl.TEXTURE0);
-		gl.bindTexture(gl.TEXTURE_2D, neheTexture);
-		gl.uniform1i(shaderProgram.uSampler, 0);
-		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
-		setMatrixUniforms();
-		gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-//	}
+	x=0, y=0, z=-5;
+	drawBox(elapsed, x, y, z);
 }
 ////////////////////////////////////////////////////////////////////
 function tick(now) {
