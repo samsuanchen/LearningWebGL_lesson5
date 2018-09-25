@@ -157,23 +157,23 @@ function handleLoadedTexture(texture) {
 var textures=[];
 ////////////////////////////////////////////////////////////////////
 function initTexture() {
-	var neheTexture = gl.createTexture();
-	neheTexture.image = new Image();
-	neheTexture.image.onload = function () {
-		handleLoadedTexture(neheTexture)
+	var texture = gl.createTexture();
+	texture.image = new Image();
+	texture.image.onload = function () {
+		handleLoadedTexture(texture)
 	}
-	neheTexture.image.src = 'nehe.gif?' + new Date().getTime();
-	neheTexture.image.setAttribute('crossOrigin', '');
-	textures.push(neheTexture);
+	texture.image.src = 'nehe.gif?' + new Date().getTime();
+	texture.image.setAttribute('crossOrigin', '');
+	textures.push(texture);
 	
-	var testTexture = gl.createTexture();
-	testTexture.image = new Image();
-	testTexture.image.onload = function () {
-		handleLoadedTexture(testTexture)
+	var texture = gl.createTexture();
+	texture.image = new Image();
+	texture.image.onload = function () {
+		handleLoadedTexture(texture)
 	}
-	testTexture.image.src = 'test.gif?' + new Date().getTime();
-	testTexture.image.setAttribute('crossOrigin', '');
-	textures.push(testTexture);
+	texture.image.src = 'test.gif?' + new Date().getTime();
+	texture.image.setAttribute('crossOrigin', '');
+	textures.push(texture);
 }
 ////////////////////////////////////////////////////////////////////
 var mvMatrix = mat4.create();
@@ -205,7 +205,7 @@ function initBuffers() {
 	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), gl.STATIC_DRAW);
 }
 ////////////////////////////////////////////////////////////////////
-function drawBox(elapsed, x, y, z, neheTexture) {
+function drawBox(elapsed, x, y, z, texture) {
 	mat4.identity(mvMatrix);
 	mat4.translate(mvMatrix, [x, y, z]);
 	mat4.rotate(mvMatrix, degToRad(xRot * elapsed), [1, 0, 0]);
@@ -216,7 +216,7 @@ function drawBox(elapsed, x, y, z, neheTexture) {
 	gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
 	gl.vertexAttribPointer(shaderProgram.aTextureCoord, xySize, gl.FLOAT, false, 0, 0);
 	gl.activeTexture(gl.TEXTURE0);
-	gl.bindTexture(gl.TEXTURE_2D, neheTexture);
+	gl.bindTexture(gl.TEXTURE_2D, texture);
 	gl.uniform1i(shaderProgram.uSampler, 0);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
 	setMatrixUniforms();
