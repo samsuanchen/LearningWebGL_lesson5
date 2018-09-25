@@ -154,28 +154,26 @@ function handleLoadedTexture(texture) {
 	gl.bindTexture(gl.TEXTURE_2D, null);
 }
 ////////////////////////////////////////////////////////////////////
-var neheTexture;
-var testTexture;
 var textures=[];
 ////////////////////////////////////////////////////////////////////
 function initTexture() {
-	var texture = gl.createTexture();
-	texture.image = new Image();
-	texture.image.onload = function () {
-		handleLoadedTexture(texture)
+	var neheTexture = gl.createTexture();
+	neheTexture.image = new Image();
+	neheTexture.image.onload = function () {
+		handleLoadedTexture(neheTexture)
 	}
-	texture.image.src = 'nehe.gif?' + new Date().getTime();
-	texture.image.setAttribute('crossOrigin', '');
-	textures.push(texture);
+	neheTexture.image.src = 'nehe.gif?' + new Date().getTime();
+	neheTexture.image.setAttribute('crossOrigin', '');
+	textures.push(neheTexture);
 	
-	var texture = gl.createTexture();
-	texture.image = new Image();
-	texture.image.onload = function () {
-		handleLoadedTexture(texture)
+	var testTexture = gl.createTexture();
+	testTexture.image = new Image();
+	testTexture.image.onload = function () {
+		handleLoadedTexture(testTexture)
 	}
-	texture.image.src = 'test.gif?' + new Date().getTime();
-	texture.image.setAttribute('crossOrigin', '');
-	textures.push(texture);
+	testTexture.image.src = 'test.gif?' + new Date().getTime();
+	testTexture.image.setAttribute('crossOrigin', '');
+	textures.push(testTexture);
 }
 ////////////////////////////////////////////////////////////////////
 var mvMatrix = mat4.create();
