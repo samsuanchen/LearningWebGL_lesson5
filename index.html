@@ -154,26 +154,20 @@ function handleLoadedTexture(texture) {
 	gl.bindTexture(gl.TEXTURE_2D, null);
 }
 ////////////////////////////////////////////////////////////////////
-var textures=[];
+var textures = [];
+var gifs = ['nehe.gif', 'test.gif'];
 ////////////////////////////////////////////////////////////////////
 function initTexture() {
-	var texture = gl.createTexture();
-	texture.image = new Image();
-	texture.image.onload = function () {
-		handleLoadedTexture(texture)
+	for(var i=0; i<2; i++) {
+		var texture = gl.createTexture();
+		texture.image = new Image();
+		texture.image.onload = function () {
+			handleLoadedTexture(texture)
+		}
+		texture.image.src = gifs[i] + '?' + new Date().getTime();
+		texture.image.setAttribute('crossOrigin', '');
+		textures.push(texture);
 	}
-	texture.image.src = 'nehe.gif?' + new Date().getTime();
-	texture.image.setAttribute('crossOrigin', '');
-	textures.push(texture);
-	
-	var texture = gl.createTexture();
-	texture.image = new Image();
-	texture.image.onload = function () {
-		handleLoadedTexture(texture)
-	}
-	texture.image.src = 'test.gif?' + new Date().getTime();
-	texture.image.setAttribute('crossOrigin', '');
-	textures.push(texture);
 }
 ////////////////////////////////////////////////////////////////////
 var mvMatrix = mat4.create();
