@@ -154,6 +154,7 @@ function handleLoadedTexture(texture) {
 }
 ////////////////////////////////////////////////////////////////////
 var neheTexture;
+var testTexture;
 ////////////////////////////////////////////////////////////////////
 function initTexture() {
 	neheTexture = gl.createTexture();
@@ -161,8 +162,16 @@ function initTexture() {
 	neheTexture.image.onload = function () {
 		handleLoadedTexture(neheTexture)
 	}
-	neheTexture.image.src = 'test.gif?' + new Date().getTime();
+	neheTexture.image.src = 'nehe.gif?' + new Date().getTime();
 	neheTexture.image.setAttribute('crossOrigin', '');
+	
+	testTexture = gl.createTexture();
+	testTexture.image = new Image();
+	testTexture.image.onload = function () {
+		handleLoadedTexture(testTexture)
+	}
+	testTexture.image.src = 'test.gif?' + new Date().getTime();
+	testTexture.image.setAttribute('crossOrigin', '');
 }
 ////////////////////////////////////////////////////////////////////
 var mvMatrix = mat4.create();
@@ -194,7 +203,7 @@ function initBuffers() {
 	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), gl.STATIC_DRAW);
 }
 ////////////////////////////////////////////////////////////////////
-function drawBox(elapsed, x, y, z) {
+function drawBox(elapsed, x, y, z, neheTexture) {
 	mat4.identity(mvMatrix);
 	mat4.translate(mvMatrix, [x, y, z]);
 	mat4.rotate(mvMatrix, degToRad(xRot * elapsed), [1, 0, 0]);
@@ -211,16 +220,18 @@ function drawBox(elapsed, x, y, z) {
 	setMatrixUniforms();
 	gl.drawElements(gl.TRIANGLES, cubeVertexIndices.length, gl.UNSIGNED_SHORT, 0);
 }
+////////////////////////////////////////////////////////////////////
 var x1=-4, y1=-4, z1=-15, x2=-1.2, y2=-1.2, z2=-12, x3=1.6, y3=1.6, z3=-9;
+////////////////////////////////////////////////////////////////////
 function drawScene(now) {
 	now = now || 0;
 	var elapsed = now / 1000;
 	gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
-	drawBox(elapsed, x1, y1, z1);
-	drawBox(elapsed, x2, y2, z2);
-	drawBox(elapsed, x3, y3, z3);
+	drawBox(elapsed, x1, y1, z1, neheTexture);
+	drawBox(elapsed, x2, y2, z2, testTexture);
+	drawBox(elapsed, x3, y3, z3, testTexture);
 }
 ////////////////////////////////////////////////////////////////////
 function tick(now) {
