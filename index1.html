@@ -157,14 +157,14 @@ function handleLoadedTexture(texture) {
 var textures=[];
 ////////////////////////////////////////////////////////////////////
 function initTexture() {
-  {	var texture = gl.createTexture();
-	texture.image = new Image();
-	texture.image.onload = function () {
-		handleLoadedTexture(texture)
+  {	var texture1 = gl.createTexture();
+	texture1.image = new Image();
+	texture1.image.onload = function () {
+		handleLoadedTexture(texture1)
 	}
-	texture.image.src = 'nehe.gif?' + new Date().getTime();
-	texture.image.setAttribute('crossOrigin', '');
-	textures.push(texture);
+	texture1.image.src = 'nehe.gif?' + new Date().getTime();
+	texture1.image.setAttribute('crossOrigin', '');
+	textures.push(texture1);
   }
   {
 	var texture = gl.createTexture();
