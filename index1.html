@@ -157,7 +157,7 @@ function handleLoadedTexture(texture) {
 var textures=[];
 ////////////////////////////////////////////////////////////////////
 function initTexture() {
-	var texture = gl.createTexture();
+  {	var texture = gl.createTexture();
 	texture.image = new Image();
 	texture.image.onload = function () {
 		handleLoadedTexture(texture)
@@ -165,7 +165,8 @@ function initTexture() {
 	texture.image.src = 'nehe.gif?' + new Date().getTime();
 	texture.image.setAttribute('crossOrigin', '');
 	textures.push(texture);
-	
+  }
+  {
 	var texture = gl.createTexture();
 	texture.image = new Image();
 	texture.image.onload = function () {
@@ -174,6 +175,7 @@ function initTexture() {
 	texture.image.src = 'test.gif?' + new Date().getTime();
 	texture.image.setAttribute('crossOrigin', '');
 	textures.push(texture);
+  }
 }
 ////////////////////////////////////////////////////////////////////
 var mvMatrix = mat4.create();
